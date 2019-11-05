@@ -3,7 +3,7 @@
  */
 
 import {combineReducers} from 'redux'
-import {AUTH_SUCCESS, ERROR_MSG} from './action-types'
+import {AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER} from './action-types'
 import {getRedirectTo} from '../utils/index'
 
 const initUser = {
@@ -16,10 +16,14 @@ const initUser = {
 const user = (state = initUser,action) => {
 	switch(action.type) {
 		case AUTH_SUCCESS :
-			const {type,header} = action.data
-			return {...state, ...action.data,redirectTo: getRedirectTo(type,header)}
+				const redirectTo = getRedirectTo(action.data.type, action.data.header)
+				return {...action.data, redirectTo}
 		case ERROR_MSG :
-				return {...state, msg: action.data}	
+				return {...state, msg: action.data}
+		case RECEIVE_USER :
+			return action.data
+		case RESET_USER :
+			return {...initUser, msg: action.data}			
 		default:
 				return state
 	}

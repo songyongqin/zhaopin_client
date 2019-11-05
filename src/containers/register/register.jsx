@@ -25,7 +25,6 @@ class Register extends Component {
 			})
 	}
 	regiser = () => {
-			console.log(this.state)
 			this.props.register(this.state)
 	}
 	toLogin = () => {

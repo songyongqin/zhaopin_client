@@ -17,7 +17,11 @@ class Login extends Component {
         })
     }
     login = () => {
+        console.log(this.state)
         this.props.login(this.state)
+    }
+    toRegister = () => {
+        this.props.history.replace('/register')
     }
     render() {
         const {msg,redirectTo} = this.props.user
@@ -37,7 +41,7 @@ class Login extends Component {
                         <WhiteSpace/>
                         <Button type="primary" onClick={this.login}>登录</Button>
                         <WhiteSpace/>
-                        <Button>还没有账户</Button>
+                        <Button onClick={this.toRegister}>还没有账户</Button>
                     </List>
                 </WingBlank>
             </div>
