@@ -3,13 +3,15 @@
  * 同步action
  * 异步action
 */
-import {reqRegister, reqLogin, reqUpdateUser, reqUser} from '../api/index'
-import {AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER} from './action-types'
+import {reqRegister, reqLogin, reqUpdateUser, reqUser, reqUserList} from '../api/index'
+import {AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER, RECEIVE_USERLIST} from './action-types'
 
 const  authSuccess = (user) => ({type: AUTH_SUCCESS, data: user})
 const  errorMsg = (msg) => ({type: ERROR_MSG, data: msg})
 const  receiveUser = (user) => ({type: RECEIVE_USER, data: user})
-const  resetUser = (msg) => ({type: RESET_USER, data: msg})
+export const  resetUser = (msg) => ({type: RESET_USER, data: msg})
+
+const receiveUserList = (userList) => ({type: RECEIVE_USERLIST, data:userList})
 
 
 export const  register =  (user) => {
@@ -76,6 +78,17 @@ export const getUser = () => {
       dispatch(receiveUser(result.data))
     }else {
       dispatch(resetUser(result.msg))
+    }
+  }
+}
+
+export const getUserList = (type) => {
+  return async dispatch => {
+    const response = await reqUserList(type)
+    const result = response.data
+    console.log(result)
+    if(result.code === 0) {
+      dispatch(receiveUserList(result.data))
     }
   }
 }

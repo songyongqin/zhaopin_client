@@ -3,6 +3,7 @@ import {Redirect, Switch, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import Cookies from 'js-cookie'
 
+import './main.scss'
 import LaobanInfo from '../laoban-info/laoban-info'
 import DashenInfo from '../dashen-info/dashen-info'
 import Dashen from '../dashen/dashen'
@@ -31,7 +32,6 @@ class Main extends Component {
 		}
 	}
 	render() {
-
 		//查看cookie中是否有userid
 		let userid = Cookies.get('userid')
 		//如果cookie中没有userid，去登录页面
@@ -54,10 +54,15 @@ class Main extends Component {
 		const {navList} = this
 		let currentPath = this.props.location.pathname
 		let currentNav = navList.find(nav => nav.path === currentPath)
-
+		const {type} = this.props.user
+		if(type === 'dashen') {
+			navList[0].hide = true
+		}else{
+			navList[1].hide = true
+		}
 		return (
 			<div>
-					{currentNav ? <NavBar className = 'stick-stop'>{currentNav.title}</NavBar> : null}
+					{currentNav ? <NavBar className = 'nav-bar'>{currentNav.title}</NavBar> : null}
 					<Switch>
 						{navList.map((nav,index) => 
 							<Route path={nav.path} component = {nav.component} key = {index}/>
@@ -66,7 +71,7 @@ class Main extends Component {
 						<Route path='/dashen_info' component = {DashenInfo} />
 						<Route component = {NotFound} />
 					</Switch>
-					{currentNav ? <NavFooter className = 'stick-stop' navList = {navList}>jiao</NavFooter> : null}
+					{currentNav ? <NavFooter className = 'footeraaaa' navList = {navList} /> : null}
 			</div>
 		)
 	}

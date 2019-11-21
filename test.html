@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body style="position: relative;">
+  <div style='width: 150px;height: 50px;background-color: green;top:0;position: absolute;z-index: 99;'></div>
+  <div style='width: 100px;height: 100px;background-color: red;position: fixed;top:0;z-index: 1;'>
+
+  </div>
+  <script>
+    let obj = {type:'dashen',test:'test'}
+    Object.keys(obj)
+    Object.keys(obj).map(key => {
+      console.log(obj)
+      console.log(key)
+      console.log(key + '--' + obj[key])
+      console.log(key + '--' + obj.key)
+    }
+    )
+  </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
  */
 
 import {combineReducers} from 'redux'
-import {AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER} from './action-types'
+import {AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER, RECEIVE_USERLIST} from './action-types'
 import {getRedirectTo} from '../utils/index'
 
 const initUser = {
@@ -28,8 +28,17 @@ const user = (state = initUser,action) => {
 				return state
 	}
 }
-
+const initUserList = []
+const userList = (state = initUserList, action) => {
+	switch(action.type) {
+		case RECEIVE_USERLIST:
+			return action.data
+		default:
+			return state
+	}
+}
 
 export default combineReducers({
-	user
+	user,
+	userList
 })
