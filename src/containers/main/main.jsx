@@ -10,6 +10,7 @@ import Dashen from '../dashen/dashen'
 import Laoban from '../laoban/laoban'
 import Message from '../message/message'
 import Personal from '../personal/personal'
+import Chat from '../chat/chat'
 import NotFound from '../../components/not-found/not-found'
 import {getRedirectTo} from '../../utils/index'
 import {getUser} from '../../redux/actions'
@@ -69,6 +70,7 @@ class Main extends Component {
 						)}
 						<Route path='/laoban_info' component = {LaobanInfo} />
 						<Route path='/dashen_info' component = {DashenInfo} />
+						<Route path='/chat/:userid' component = {Chat} />
 						<Route component = {NotFound} />
 					</Switch>
 					{currentNav ? <NavFooter className = 'footeraaaa' navList = {navList} /> : null}

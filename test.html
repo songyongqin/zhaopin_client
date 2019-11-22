@@ -12,15 +12,19 @@
 
   </div>
   <script>
-    let obj = {type:'dashen',test:'test'}
-    Object.keys(obj)
-    Object.keys(obj).map(key => {
-      console.log(obj)
-      console.log(key)
-      console.log(key + '--' + obj[key])
-      console.log(key + '--' + obj.key)
-    }
-    )
+    let arr = [
+      {id:'a',username:'zhangsan1',age:15},
+      {id:'b',username:'zhangsan2',age:25},
+      {id:3,username:'zhangsan3',age:35},
+      {id:4,username:'zhangsan4',age:45},
+      {id:5,username:'zhangsan5',age:55},
+    ]
+    //期望
+    const users = arr.reduce((users,user) => {
+      users[user.id] = {username:user.username}
+      return users
+    },{})
+    console.log(users)
   </script>
 </body>
 </html>

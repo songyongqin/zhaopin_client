@@ -10,7 +10,10 @@ class NavFooter extends Component {
   static propType = {
     navList: PropType.func.isRequired
   }
-  node = window.document.createElement('div')
+  constructor(props){
+    super(props)
+    this.node = window.document.createElement('div')
+  }
   componentDidMount() {
     window.document.body.appendChild(this.node)
   }
@@ -37,17 +40,19 @@ class NavFooter extends Component {
           </TabBar>
         </div> ,this.node
       )
-      // <TabBar>
-      //   { navList.map((nav) => 
-      //     <Item
-      //     key = {nav.path}
-      //     title={nav.title} 
-      //     icon={{uri:require(`./imgs/${nav.icon}.png`)}}
-      //     selectedIcon = {{uri:require(`./imgs/${nav.icon}-selected.png`)}}
-      //     selected = {pathname === nav.path}
-      //     onPress = {() => {this.props.history.replace(nav.path)}} />
-      //   )}
-      // </TabBar>
+      // <div style={{position:'fixed', bottom:0, width: '100%'}}>
+      //   <TabBar>
+      //     { navList.map((nav) => 
+      //       <Item
+      //       key = {nav.path}
+      //       title={nav.title} 
+      //       icon={{uri:require(`./imgs/${nav.icon}.png`)}}
+      //       selectedIcon = {{uri:require(`./imgs/${nav.icon}-selected.png`)}}
+      //       selected = {pathname === nav.path}
+      //       onPress = {() => {this.props.history.replace(nav.path)}} />
+      //     )}
+      //   </TabBar>
+      // </div>
     )
   }
 }
