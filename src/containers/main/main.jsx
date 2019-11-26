@@ -61,8 +61,9 @@ class Main extends Component {
 		}else{
 			navList[1].hide = true
 		}
+		const {unReadCount} = this.props
 		return (
-			<div>
+			<div style={{height:'100%'}}>
 					{currentNav ? <NavBar className = 'nav-bar'>{currentNav.title}</NavBar> : null}
 					<Switch>
 						{navList.map((nav,index) => 
@@ -73,13 +74,13 @@ class Main extends Component {
 						<Route path='/chat/:userid' component = {Chat} />
 						<Route component = {NotFound} />
 					</Switch>
-					{currentNav ? <NavFooter className = 'footeraaaa' navList = {navList} /> : null}
+					{currentNav ? <NavFooter navList = {navList} unReadCount={unReadCount} /> : null}
 			</div>
 		)
 	}
 }
 
 export default connect(
-	state => ({user:state.user}),
+	state => ({user:state.user,unReadCount: state.chat.unReadCount}),
 	{getUser}
 )(Main)

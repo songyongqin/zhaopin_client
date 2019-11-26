@@ -3,7 +3,7 @@
  */
 
 import {combineReducers} from 'redux'
-import {AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER, RECEIVE_USERLIST, RECEIVE_MSG_LIST, RECEIVE_MSG} from './action-types'
+import {AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER, RECEIVE_USERLIST, RECEIVE_MSG_LIST, RECEIVE_MSG, MSG_READ} from './action-types'
 import {getRedirectTo} from '../utils/index'
 
 const initUser = {
@@ -39,21 +39,43 @@ const userList = (state = initUserList, action) => {
 }
 
 const initChat = {
-	user:{},
+	users:{},
 	chatMsgs:[],
 	unReadCount: 0
 }
 
 const chat = (state = initChat, action) => {
-
 	switch(action.type){
 		case RECEIVE_MSG_LIST:
-			const {chatMsgs, users} = action.data
+			const {chatMsgs, users, userid} = action.data
 			return {
 				chatMsgs,
 				users,
-				unReadCount: 0
+				unReadCount: chatMsgs.reduce((propTotal, msg) => {
+					return propTotal + (!msg.read && msg.to === userid ? 1 :0)
+				},0)
 			}
+		case RECEIVE_MSG: 
+			const {chatMsg} = action.data
+			return {
+				users:state.users,
+				chatMsgs: [...state.chatMsgs, chatMsg],
+				unReadCount: state.unReadCount + ((!chatMsg.read && chatMsg.to === action.data.userid) ? 1 :0)
+			}
+		case MSG_READ:
+			const {from, to, count} = action.data
+
+			return {
+				users:state.users,
+				chatMsgs: state.chatMsgs.map(msg => {
+					if(msg.from === from && msg.to === to && !msg.read){
+						return {...msg, read:true}
+					} else {
+						return msg
+					}
+				}),
+				unReadCount: state.unReadCount - count
+			}	
 		default:
 			return state
 	}

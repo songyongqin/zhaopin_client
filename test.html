@@ -7,10 +7,11 @@
   <title>Document</title>
 </head>
 <body style="position: relative;">
-  <div style='width: 150px;height: 50px;background-color: green;top:0;position: absolute;z-index: 99;'></div>
-  <div style='width: 100px;height: 100px;background-color: red;position: fixed;top:0;z-index: 1;'>
-
+  <div style="display: flex;float: right;">
+    <div style='width: 150px;height: 100px;background-color: green;'></div>
+    <div style='width: 100px;height: 100px;background-color: red;'></div>
   </div>
+  
   <script>
     let arr = [
       {id:'a',username:'zhangsan1',age:15},
@@ -25,6 +26,7 @@
       return users
     },{})
     console.log(users)
+    // "start": "react-app-rewired start",
   </script>
 </body>
 </html>

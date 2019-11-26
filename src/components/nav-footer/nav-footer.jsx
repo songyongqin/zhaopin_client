@@ -8,7 +8,8 @@ import PropType from 'prop-types'
 const Item = TabBar.Item
 class NavFooter extends Component {
   static propType = {
-    navList: PropType.func.isRequired
+    navList: PropType.func.isRequired,
+    unReadCount: PropType.number.isRequired,
   }
   constructor(props){
     super(props)
@@ -22,7 +23,7 @@ class NavFooter extends Component {
   }
   render() {
     const {pathname} = this.props.location
-    let {navList} = this.props
+    let {navList, unReadCount} = this.props
     navList = navList.filter(nav => nav.hide !== true)
     return (
       createPortal(
@@ -31,6 +32,7 @@ class NavFooter extends Component {
             { navList.map((nav) => 
               <Item
               key = {nav.path}
+              badge = {nav.path === '/message' ? unReadCount: 0}
               title={nav.title} 
               icon={{uri:require(`./imgs/${nav.icon}.png`)}}
               selectedIcon = {{uri:require(`./imgs/${nav.icon}-selected.png`)}}
